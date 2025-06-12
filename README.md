@@ -41,6 +41,17 @@ jupyter notebook notebooks/sales_prediction.ipynb
 
 ## 🧠 Model Overview
 
+Different models were  used here:
+
+1. **Base Model:**
+    - Model type: ARIMA (order=(5,1,0)).
+    - Notebook: [Base Model](./notebooks/sales_prediction.ipynb)
+    - Evaulation Metrics:
+        - Root Mean Square Error
+    - Model Output: Model trained and saved as a `.pkl` file in `.models/` folder.
+    - 📈 Results:
+        - Walk forward validation RMSE: 74464.67
+
 ## 📌 Future Improvements
 
 ## Contributing

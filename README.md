@@ -52,7 +52,41 @@ Different models were  used here:
     - 📈 Results:
         - Walk forward validation RMSE: 74464.67
 
+1. **Second Model:**
+    - Model type: LGBMRegressor (LightGBM).
+    - Notebook: [LightGBM model](./notebooks/sales_prediction_lightgbm.ipynb)
+    - Feature Engineering:
+        - Aggregated sales data to daily levels.
+        - Added lag features for both units and revenue (such as `revenue_lag_7` and `units_lag_7`).
+        - Added rolling features such as `rev_rolling_7_mean` and `units_rolling_7_mean`.
+        - Added interactive features such as `promo_weekend`, `days_since_promo` and `price_competition` to make available to the model, the combined effects of some features.
+        - Refer to the `Feature Engineering` section of the notebook.
+    - Evaulation Metrics:
+        - Root Mean Square Error
+        - Mean Absolute Error
+    - Model Output: Model trained and saved as a `.pkl` file in `.models/` folder.
+    - Comments and Issues:
+        - Significant improvement in evaluation as compared to the Base Model. This is owed to significant feature engineering, improving the model's "knowledge" about the data set.
+        - Spikes in residuals towards mid months and start of months, indicate that a quarterly or bi-weekly features would have improvement on the model's performance.
+    - 📈 Results:
+        - Units Model:
+            - `Training MAE`: 96.76237129129042
+            - `Training RMSE`: 156.7168398345387
+            - `Test MAE`: 149.19269454223104
+            - `Test RMSE`: 215.0246996291744
+        - Revenue Model:
+            - `Training MAE`: 4202.384341148988
+            - `Training RMSE`: 6534.812370685227
+            - `Test MAE`: 11333.096425190528
+            - `Test RMSE`: 17910.90607771323
+
 ## 📌 Future Improvements
+- Try different forecasting models like Prophet or XGBoost for comparison
+- Add bi-weekly and monthly features. 
+- SHAP analysis for interpretability
+- Using model ensembles (average predictions of 2–3 models)
+- Evaluate model on new unseen data or deploy via a simple web API.
+
 
 ## Contributing
 Contributions are welcome. To contribute:

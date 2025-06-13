@@ -30,13 +30,15 @@ cd time-series-forecasting
 This assumes an anaconda environment.
 
 3. **Open notebook**
+Open any of the notebooks
 ``` bash
 jupyter notebook notebooks/sales_prediction.ipynb
+jupyter notebook notebooks/sales_prediction_lightgbm.ipynb
 ```
 
 4. **Run:**
     - Run all cells to reproduce the results.
-    - Alternatively, create a new `.py` file and load the saved models from the `.models/` folder to make predictions
+    - Alternatively, create a new `.py` file and load the saved models from the `./models/` folder to make predictions
 
 
 ## 🧠 Model Overview
@@ -46,9 +48,9 @@ Different models were  used here:
 1. **Base Model:**
     - Model type: ARIMA (order=(5,1,0)).
     - Notebook: [Base Model](./notebooks/sales_prediction.ipynb)
-    - Evaulation Metrics:
+    - Evaluation Metrics:
         - Root Mean Square Error
-    - Model Output: Model trained and saved as a `.pkl` file in `.models/` folder.
+    - Model Output: Model trained and saved as a `.pkl` file in `./models/` folder.
     - 📈 Results:
         - Walk forward validation RMSE: 74464.67
 
@@ -61,13 +63,20 @@ Different models were  used here:
         - Added rolling features such as `rev_rolling_7_mean` and `units_rolling_7_mean`.
         - Added interactive features such as `promo_weekend`, `days_since_promo` and `price_competition` to make available to the model, the combined effects of some features.
         - Refer to the `Feature Engineering` section of the notebook.
-    - Evaulation Metrics:
+    - Evaluation Metrics:
         - Root Mean Square Error
         - Mean Absolute Error
-    - Model Output: Model trained and saved as a `.pkl` file in `.models/` folder.
+    - Model Output: Model trained and saved as a `.pkl` file in `./models/` folder.
     - Comments and Issues:
         - Significant improvement in evaluation as compared to the Base Model. This is owed to significant feature engineering, improving the model's "knowledge" about the data set.
+
+            | Model        | Test RMSE         |
+            |--------------|------------------|
+            | ARIMA        | 74,464.67 (Revenue)    |
+            | LightGBM     | 215.02 (Units) / 17,910.91 (Revenue) |
+
         - Spikes in residuals towards mid months and start of months, indicate that a quarterly or bi-weekly features would have improvement on the model's performance.
+        
     - 📈 Results:
         - Units Model:
             - `Training MAE`: 96.76237129129042
@@ -80,12 +89,28 @@ Different models were  used here:
             - `Test MAE`: 11333.096425190528
             - `Test RMSE`: 17910.90607771323
 
+### 🛠 Feature Engineering Highlights (From the Second Model)
+- Lag features: `units_lag_7`, `revenue_lag_7`
+- Rolling stats: `units_rolling_7_mean`, `rev_rolling_7_mean`
+- Interaction terms: `promo_weekend`, `price_competition`
+- Custom recency features: `days_since_promo`
+
 ## 📌 Future Improvements
-- Try different forecasting models like Prophet or XGBoost for comparison
-- Add bi-weekly and monthly features. 
-- SHAP analysis for interpretability
-- Using model ensembles (average predictions of 2–3 models)
-- Evaluate model on new unseen data or deploy via a simple web API.
+
+### 🔬 Modeling
+- Try forecasting models like Prophet or XGBoost
+- Use model ensembles for more robust results
+
+### 📅 Feature Engineering
+- Add bi-weekly, monthly, and quarter-end/start indicators
+- Engineer seasonality features
+
+### 📈 Interpretability
+- Apply SHAP analysis to understand feature influence
+
+### ☁️ Deployment
+- Deploy model using FastAPI + Render or Railway
+- Build an interactive dashboard to visualize predictions
 
 
 ## Contributing

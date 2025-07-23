@@ -6,12 +6,17 @@ This project focuses on performing time series analysis on sales data to identif
 
 <pre>
 .
-├── data/ Data set links
-├── models/ # Saved trained models (pickle file)
-├── notebooks/ # Jupyter Notebook used for analysis
-│ └──  sales_prediction.ipynb
-├── README.md # This file
-└── .gitignore # Files to ignore
+├── api/ # 💡 NEW: FastAPI app for model deployment
+│ ├── app.py # API code that loads the model and handles prediction
+│ ├── requirements.txt # Dependencies for the API
+│ └── utils.py # Any preprocessing helper functions
+├── data/ # Dataset links 
+├── models/ # Saved trained models (pickle files)
+├── notebooks/ # Jupyter Notebooks for exploration and model building
+│ └── sales_prediction_lightgbm.ipynb
+│ └── sales_prediction.ipynb
+├── README.md # This files
+└── .gitignore # Files and folders to ignore in version control
 </pre>
 
 ##  📊 Dataset

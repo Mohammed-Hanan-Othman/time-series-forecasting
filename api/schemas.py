@@ -12,4 +12,5 @@ class DailyRecord(BaseModel):
 
 class PredictionRequest(BaseModel):
     product_id: str
+    forecast_days: int
     data: List[DailyRecord]

@@ -84,21 +84,90 @@ Different models were  used here:
         
     - 📈 Results:
         - Units Model:
-            - `Training MAE`: 96.76237129129042
-            - `Training RMSE`: 156.7168398345387
-            - `Test MAE`: 149.19269454223104
-            - `Test RMSE`: 215.0246996291744
+            - `Training MAE`: 96.76
+            - `Training RMSE`: 156.72
+            - `Test MAE`: 149.19
+            - `Test RMSE`: 215.02
         - Revenue Model:
-            - `Training MAE`: 4202.384341148988
-            - `Training RMSE`: 6534.812370685227
-            - `Test MAE`: 11333.096425190528
-            - `Test RMSE`: 17910.90607771323
+            - `Training MAE`: 4202.38
+            - `Training RMSE`: 6534.81
+            - `Test MAE`: 11333.10
+            - `Test RMSE`: 17910.91
 
 ### 🛠 Feature Engineering Highlights (From the Second Model)
 - Lag features: `units_lag_7`, `revenue_lag_7`
 - Rolling stats: `units_rolling_7_mean`, `rev_rolling_7_mean`
 - Interaction terms: `promo_weekend`, `price_competition`
 - Custom recency features: `days_since_promo`
+
+
+
+
+## 📡 API Integration (FastAPI)
+This project includes a FastAPI backend that provides revenue forecasts for a given product based on historical sales and pricing data.
+
+### ⚡Running the API 
+- Install the dependencies if you haven't installed them already. 
+(Ensure you are in the `./api` directory)
+```bash
+pip install -r requirements.txt
+```
+- Start the server (replace app:app with your actual filename and FastAPI app name):
+```bash
+uvicorn app:app --reload
+```
+
+### 📘 API Endpoint
+
+#### `POST /predict/revenue`
+Generate revenue forecasts for a specified product over a number of future days.
+
+##### ✅ **Request Body**
+
+> Note: You must provide **at least 30 days of historical data** for accurate forecasting.
+```json
+{
+  "product_id": "ProductID",
+  "forecast_days": 7,
+  "data": [
+    {
+      "Date": "2025-03-01",
+      "Product_ID": "ProductID",
+      "Competitor_Pricing": 200.95,
+      "Discount": 12.2,
+      "Holiday_Promotion": 0,
+      "Units_Sold": 3100,
+      "Price": 200.06
+    }
+    // ... at least 30 days of such records
+  ]
+}
+```
+##### 🔁 **Response Format**
+
+```json
+{
+  "success": true,
+  "data": {
+    "forecast_days": 7,
+    "units": "USD",
+    "product_id": "Random product id",
+    "generated_at": "TIME_STAMP",
+    "predictions": {
+      "2025-04-11T00:00:00": 739861.95,
+      "2025-04-12T00:00:00": 734582.02,
+      "2025-04-13T00:00:00": 748684.59,
+      "2025-04-14T00:00:00": 741832.45,
+      "2025-04-15T00:00:00": 736485.11,
+      "2025-04-16T00:00:00": 729632.97,
+      "2025-04-17T00:00:00": 736485.11
+    }
+  }
+}
+```
+
+### 🧩 Notes
+- Ensure all fields are properly formatted and dates are in the ISO format.
 
 ## 📌 Future Improvements
 

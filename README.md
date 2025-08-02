@@ -9,6 +9,8 @@ This project focuses on performing time series analysis on sales data to identif
 ├── api/ # 💡 NEW: FastAPI app for model deployment
 │ ├── app.py # API code that loads the model and handles prediction
 │ ├── requirements.txt # Dependencies for the API
+│ ├── schemas.py # Contains API requests formats
+│ ├── train_models.py # Model building script
 │ └── utils.py # Any preprocessing helper functions
 ├── data/ # Dataset links 
 ├── models/ # Saved trained models (pickle files)

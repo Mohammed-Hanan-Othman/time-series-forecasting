@@ -5,7 +5,7 @@ import datetime
 from schemas import PredictionRequest
 from utils import create_rev_forecast_seed, generate_rev_forecast_features, run_rev_recursive_forecast
 
-with open("../models/lightgbm_revenue.pkl", "rb") as file:
+with open("./models/lightgbm_revenue.pkl", "rb") as file:
     model_revenue = pickle.load(file)
 
 app = FastAPI()
